@@ -9,6 +9,14 @@ import json
 from pathlib import Path
 from playwright.async_api import async_playwright, TimeoutError as PlaywrightTimeout
 
+# Carrega .env automaticamente se existir
+_env_file = Path(__file__).parent / ".env"
+if _env_file.exists():
+    for line in _env_file.read_text().splitlines():
+        if "=" in line and not line.startswith("#"):
+            k, _, v = line.partition("=")
+            os.environ.setdefault(k.strip(), v.strip())
+
 # ── Configuração ──────────────────────────────────────────────────────────────
 BASE_URL = "https://estudante.estuda.com"
 EMAIL    = os.getenv("ESTUDA_EMAIL", "")

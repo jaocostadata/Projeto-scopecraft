@@ -1,0 +1,4 @@
+.env
+screenshots/
+questoes_selecionadas.json
+__pycache__/
